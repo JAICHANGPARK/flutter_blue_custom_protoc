@@ -861,7 +861,7 @@ public class FlutterBluePlugin implements FlutterPlugin, ActivityAware, MethodCa
                     gatt.close();
                 }
             }
-            invokeMethodUIThread("DeviceState", ProtoMaker.from(gatt.getDevice(), newState).toByteArray());
+            invokeMethodUIThread("DeviceState", ProtoMaker.from(gatt.getDevice(), newState, status).toByteArray());
         }
 
         @Override

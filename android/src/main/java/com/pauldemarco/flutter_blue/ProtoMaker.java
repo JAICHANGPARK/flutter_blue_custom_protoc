@@ -205,4 +205,27 @@ public class ProtoMaker {
         p.setRemoteId(device.getAddress());
         return p.build();
     }
+
+    static Protos.DeviceStateResponse from(BluetoothDevice device, int state, int oldValue) {
+        Protos.DeviceStateResponse.Builder p = Protos.DeviceStateResponse.newBuilder();
+        switch(state) {
+            case BluetoothProfile.STATE_DISCONNECTING:
+                p.setState(Protos.DeviceStateResponse.BluetoothDeviceState.DISCONNECTING);
+                break;
+            case BluetoothProfile.STATE_CONNECTED:
+                p.setState(Protos.DeviceStateResponse.BluetoothDeviceState.CONNECTED);
+                break;
+            case BluetoothProfile.STATE_CONNECTING:
+                p.setState(Protos.DeviceStateResponse.BluetoothDeviceState.CONNECTING);
+                break;
+            case BluetoothProfile.STATE_DISCONNECTED:
+                p.setState(Protos.DeviceStateResponse.BluetoothDeviceState.DISCONNECTED);
+                break;
+            default:
+                break;
+        }
+        p.setRemoteId(device.getAddress());
+        p.setOldState(oldValue);
+        return p.build();
+    }
 }
